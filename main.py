@@ -1,3 +1,4 @@
+from models import Livro, Usuario, Emprestimo
 diaAtualSistema = 1 #variável global que servirá de controle para verificar o funcionamento de empréstimos e multas
 
 #implementação do laço de repetição que exibe o menu principal:
