@@ -114,7 +114,6 @@ def devolverEmprestimo(listaEmprestimos, listaLivros):
                     listaLivros[i].qtdExemplares += 1
                     break
             listaEmprestimos[indexEmprestimo].status = "devolvido"
-            listaEmprestimos.pop(indexEmprestimo)
             if dataDevolucaoEfetiva > listaEmprestimos[indexEmprestimo].dataDevolucao:
                 valorMultaDia = 1.0
                 diasEmAtraso = dataDevolucaoEfetiva - listaEmprestimos[indexEmprestimo].dataDevolucao
@@ -127,6 +126,7 @@ def devolverEmprestimo(listaEmprestimos, listaLivros):
             else:
                 print(f"Devolução realizada com sucesso!")
                 print("------------------")
+            listaEmprestimos.pop(indexEmprestimo)
 
         else:
             print(f"Não existe um empréstimo/livro para este código.")
