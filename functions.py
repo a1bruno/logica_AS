@@ -20,7 +20,8 @@ def cadastrarLivro():
         qtdExemplares = qtdExemplares
     )
     #mostrando ao usuário o livro que foi criado
-    print(f'O livro "{livro.titulo}" foi cadastrado com sucesso.')
+    print(f'\nO livro "{livro.titulo}" foi cadastrado com sucesso.\n')
+    print("------------------")
     return livro
 
 def cadastrarUsuario():
@@ -37,7 +38,7 @@ def cadastrarUsuario():
         tipo = tipo
     )
     #confirmando que o usuário foi criado
-    print(f"{usuario.nome} registrado com sucesso!")
+    print(f"\n{usuario.nome} registrado com sucesso!\n")
     return usuario
 
 
