@@ -44,23 +44,26 @@ def cadastrarUsuario():
 
 def realizarEmprestimo(listaUsuarios, listaLivros):
     if len(listaUsuarios) > 0 and len(listaLivros) > 0:
+        usuarioValido = False
         idUsuario = int(input(f"Digite o ID do usuário: "))
         print("------------------")
-        usuarioValido = False
-        idLivro = int(input(f"Digite o código do livro para empréstimo: "))
-        print("------------------")
-        livroValido = False
-
         for i in range(len(listaUsuarios)):
             if listaUsuarios[i].id == idUsuario:
                 usuarioValido = True
                 usuario = listaUsuarios[i]
-        for i in range(len(listaLivros)):
-            if listaLivros[i].id == idLivro and listaLivros[i].qtdExemplares > 0:
-                livroValido = True
-                indexLivro = i
-        if livroValido == False:
-            print("O código do livro está incorreto ou não há mais exemplares disponíveis.")
+        if usuarioValido == True:
+            livroValido = False
+            idLivro = int(input(f"Digite o código do livro para empréstimo: "))
+            print("------------------")
+            for i in range(len(listaLivros)):
+                if listaLivros[i].id == idLivro and listaLivros[i].qtdExemplares > 0:
+                    livroValido = True
+                    indexLivro = i
+            if livroValido == False:
+                print("O código do livro está incorreto ou não há mais exemplares disponíveis.")
+                print("------------------")
+        else:
+            print(f"O ID está incorreto ou não há usuários para este ID.")
             print("------------------")
 
         if usuarioValido == True and livroValido == True:
