@@ -159,3 +159,20 @@ def listarEmprestimos(listaEmprestimos, listaUsuarios, listaLivros):
     else:
         print(f"Não há empréstimos ativos.")
         print("------------------")
+
+def listarEmprestimosAtrasados(listaEmprestimos):
+    livrosAtrasados = []
+    if len(listaEmprestimos) > 0:
+        for i in range(len(listaEmprestimos)):
+            if listaEmprestimos[i].dataDevolucao < diaAtualSistema:
+                livrosAtrasados.append(listaEmprestimos[i])
+    if len(livrosAtrasados) > 0:
+        print(f"Livros com empréstimo em atraso: ")
+        for i in range(len(livrosAtrasados)):
+            print(f"Livro com ID: {livrosAtrasados[i].idLivro}")
+            print(f"Usuário responsável: {livrosAtrasados[i].idUsuario}")
+            print(f"Data prevista para devolução: {livrosAtrasados[i].dataDevolucao} - Data atual: {diaAtualSistema}")
+            print("------------------")
+    else:
+        print(f"Não há livros com empréstimo em atraso.")
+        print("------------------")

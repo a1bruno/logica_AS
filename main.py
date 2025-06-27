@@ -1,4 +1,4 @@
-from functions import cadastrarLivro, cadastrarUsuario, realizarEmprestimo, devolverEmprestimo, listarEmprestimos
+from functions import cadastrarLivro, cadastrarUsuario, realizarEmprestimo, devolverEmprestimo, listarEmprestimos, listarEmprestimosAtrasados
 from banco_base import users, books, rents
 listaLivros = [books.sangueEGelo, books.oMorroDosVentosUivantes, books.asVantagensDeSerInvisivel, books.psicologiaFinanceira] #lista para armazenar os livros
 listaUsuarios = [users.bruno, users.josefina, users.antonio, users.melissa] #lista para armazenar os usuários
@@ -97,6 +97,9 @@ while True:
                     case 1:
                         listarEmprestimos(listaEmprestimos, listaUsuarios, listaLivros)
                     case 2:
+                        listarEmprestimosAtrasados(listaEmprestimos)
+                    case 3:
+                        print(f"Voltando para o menu principal...")
                         break
                     case _:
                         print(f"Opção inválida. Tente novamente.")
