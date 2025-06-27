@@ -1,6 +1,8 @@
 from functions import cadastrarLivro, cadastrarUsuario, realizarEmprestimo
-listaLivros = [] #lista para armazenar os livros
-listaUsuarios = [] #lista para armazenar os usuários
+from banco_base import users, books, rents
+listaLivros = [books.sangueEGelo, books.oMorroDosVentosUivantes, books.asVantagensDeSerInvisivel, books.psicologiaFinanceira] #lista para armazenar os livros
+listaUsuarios = [users.bruno, users.josefina, users.antonio, users.melissa] #lista para armazenar os usuários
+listaEmprestimos = [rents.emprestimoBruno, rents.emprestimoAntonio] #lista para armazenar os emprestimos realizados
 
 #implementação do laço de repetição que exibe o menu principal:
 while True:
