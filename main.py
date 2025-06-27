@@ -1,6 +1,4 @@
-from models import Livro, Usuario, Emprestimo
-from functions import cadastrarLivro, cadastrarUsuario
-diaAtualSistema = 1 #variável global que servirá de controle para verificar o funcionamento de empréstimos e multas
+from functions import cadastrarLivro, cadastrarUsuario, realizarEmprestimo
 listaLivros = [] #lista para armazenar os livros
 listaUsuarios = [] #lista para armazenar os usuários
 
@@ -87,7 +85,7 @@ while True:
                         print(f"Opção inválida. Tente outra vez.")
                         print("------------------")
         case 3:
-            print("Em desenvolvimento")
+            novoEmprestimo = realizarEmprestimo(listaUsuarios, listaLivros)
         case 4:
             print("Em desenvolvimento")
         case 5:

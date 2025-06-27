@@ -1,4 +1,5 @@
 from models import Livro, Usuario, Emprestimo #importando os dataclasses criados
+diaAtualSistema = 1 #variável global que servirá de controle para verificar o funcionamento de empréstimos e multas
 
 def cadastrarLivro():
     print(f"Iniciando cadastro de livro...")
@@ -41,4 +42,47 @@ def cadastrarUsuario():
     print(f"\n Usuário {usuario.nome} registrado com sucesso!\n")
     return usuario
 
+def realizarEmprestimo(listaUsuarios, listaLivros):
+    if len(listaUsuarios) > 0 and len(listaLivros) > 0:
+        idUsuario = int(input(f"Digite o ID do usuário: "))
+        print("------------------")
+        usuarioValido = False
+        idLivro = int(input(f"Digite o código do livro para empréstimo: "))
+        print("------------------")
+        livroValido = False
 
+        for i in range(len(listaUsuarios)):
+            if listaUsuarios[i].id == idUsuario:
+                usuarioValido = True
+                usuario = listaUsuarios[i]
+        for i in range(len(listaLivros)):
+            if listaLivros[i].id == idLivro and listaLivros[i].qtdExemplares > 0:
+                livroValido = True
+                indexLivro = i
+        if livroValido == False:
+            print("O código do livro está incorreto ou não há mais exemplares disponíveis.")
+            print("------------------")
+
+        if usuarioValido == True and livroValido == True:
+            emprestimo = Emprestimo(
+                idUsuario = idUsuario,
+                idLivro = idLivro,
+                dataEmprestimo = diaAtualSistema,
+                dataDevolucao = diaAtualSistema,
+                status = "ativo"
+            )
+            if usuario.tipo == "aluno" or usuario.tipo == "Aluno":
+                emprestimo.dataDevolucao = diaAtualSistema + 7
+            elif usuario.tipo == "professor" or usuario.tipo == "Professor":
+                emprestimo.dataDevolucao = diaAtualSistema + 10
+            listaLivros[indexLivro].qtdExemplares -= 1
+            print(f"Empréstimo realizado com sucesso:")
+            print(f"Usuário do empréstimo: {usuario.nome};")
+            print(f"Livro: {listaLivros[indexLivro].titulo};")
+            print(f"Data de devolução prevista para dia {emprestimo.dataDevolucao}.")
+            print("------------------")
+            return emprestimo
+    else:
+        print("Não é possível realizar um empréstimo. Não existem livros e/ou usuários cadastrados em nosso sistema.")
+        print("------------------")
+        

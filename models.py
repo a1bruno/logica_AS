@@ -20,3 +20,5 @@ class Emprestimo:
     idUsuario: int #registra o id do usuário para o empréstimo
     idLivro: int #define o livro que o usuário escolheu baseado no código do livro
     dataEmprestimo: int #define a data que foi realizado o empréstimo
+    dataDevolucao: int
+    status: str
