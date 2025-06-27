@@ -1,5 +1,4 @@
 from models import Livro, Usuario, Emprestimo #importando os dataclasses criados
-diaAtualSistema = 1 #variável global que servirá de controle para verificar o funcionamento de empréstimos e multas
 
 def cadastrarLivro():
     print(f"Iniciando cadastro de livro...")
@@ -42,7 +41,7 @@ def cadastrarUsuario():
     print(f"\n Usuário {usuario.nome} registrado com sucesso!\n")
     return usuario
 
-def realizarEmprestimo(listaUsuarios, listaLivros, listaEmprestimos):
+def realizarEmprestimo(listaUsuarios, listaLivros, listaEmprestimos, diaAtualSistema):
     if len(listaUsuarios) > 0 and len(listaLivros) > 0:
         usuarioValido = False
         idUsuario = int(input(f"Digite o ID do usuário: "))
@@ -90,7 +89,7 @@ def realizarEmprestimo(listaUsuarios, listaLivros, listaEmprestimos):
         print("Não é possível realizar um empréstimo. Não existem livros e/ou usuários cadastrados em nosso sistema.")
         print("------------------")
         
-def devolverEmprestimo(listaEmprestimos, listaLivros):
+def devolverEmprestimo(listaEmprestimos, listaLivros, diaAtualSistema):
     emprestimoExistente = False
     livroCorreto = False
     idUsuario = int(input(f"Digite o id do usuário: "))
@@ -160,7 +159,7 @@ def listarEmprestimos(listaEmprestimos, listaUsuarios, listaLivros):
         print(f"Não há empréstimos ativos.")
         print("------------------")
 
-def listarEmprestimosAtrasados(listaEmprestimos):
+def listarEmprestimosAtrasados(listaEmprestimos, diaAtualSistema):
     livrosAtrasados = []
     if len(listaEmprestimos) > 0:
         for i in range(len(listaEmprestimos)):
@@ -176,3 +175,49 @@ def listarEmprestimosAtrasados(listaEmprestimos):
     else:
         print(f"Não há livros com empréstimo em atraso.")
         print("------------------")
+
+def menuGerenciarTempo(diaAtualSistema):
+    while True:
+        print("\n--- Gerenciar Tempo ---")
+        print(f"Dia Atual do Sistema: {diaAtualSistema}")
+        print("1. Avançar 1 dia")
+        print("2. Avançar 7 dias (1 semana)")
+        print("3. Avançar N dias")
+        print("4. Consultar dia atual")
+        print("5. Voltar ao Menu Principal")
+        
+        opcaoTempo = input("Escolha uma opção: ")
+        print("------------------")
+
+        if opcaoTempo == '1':
+            diaAtualSistema += 1
+            print(f"Sistema avançou para o dia: {diaAtualSistema}")
+            print("------------------")
+        elif opcaoTempo == '2':
+            diaAtualSistema += 7
+            print(f"Sistema avançou 7 dias. Novo dia: {diaAtualSistema}")
+            print("------------------")
+        elif opcaoTempo == '3':
+            try:
+                nDias = int(input("Quantos dias deseja avançar? "))
+                if nDias > 0:
+                    diaAtualSistema += nDias
+                    print(f"Sistema avançou {nDias} dias. Novo dia: {diaAtualSistema}")
+                    print("------------------")
+                else:
+                    print("Por favor, insira um número positivo de dias.")
+                    print("------------------")
+            except ValueError:
+                print("Entrada inválida. Por favor, insira um número.")
+                print("------------------")
+        elif opcaoTempo == '4':
+            print(f"O dia atual do sistema é: {diaAtualSistema}")
+            print("------------------")
+        elif opcaoTempo == '5':
+            print("Retornando ao Menu Principal...")
+            print("------------------")
+            break # Sai do loop do menu_gerenciar_tempo
+        else:
+            print("Opção inválida. Tente novamente.")
+            print("------------------")
+        return diaAtualSistema # Retorna o dia atualizado

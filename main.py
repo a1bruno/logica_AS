@@ -1,5 +1,6 @@
-from functions import cadastrarLivro, cadastrarUsuario, realizarEmprestimo, devolverEmprestimo, listarEmprestimos, listarEmprestimosAtrasados
+from functions import cadastrarLivro, cadastrarUsuario, realizarEmprestimo, devolverEmprestimo, listarEmprestimos, listarEmprestimosAtrasados, menuGerenciarTempo
 from banco_base import users, books, rents
+diaAtualSistema = 1
 listaLivros = [books.sangueEGelo, books.oMorroDosVentosUivantes, books.asVantagensDeSerInvisivel, books.psicologiaFinanceira] #lista para armazenar os livros
 listaUsuarios = [users.bruno, users.josefina, users.antonio, users.melissa] #lista para armazenar os usuários
 listaEmprestimos = [rents.emprestimoBruno, rents.emprestimoAntonio] #lista para armazenar os emprestimos realizados
@@ -87,9 +88,9 @@ while True:
                         print(f"Opção inválida. Tente outra vez.")
                         print("------------------")
         case 3:
-            novoEmprestimo = realizarEmprestimo(listaUsuarios, listaLivros, listaEmprestimos)
+            novoEmprestimo = realizarEmprestimo(listaUsuarios, listaLivros, listaEmprestimos, diaAtualSistema)
         case 4:
-            devolucao = devolverEmprestimo(listaEmprestimos, listaLivros)
+            devolucao = devolverEmprestimo(listaEmprestimos, listaLivros, diaAtualSistema)
         case 5:
             while True:
                 opcaoMenuEmprestimos = int(input("1. Listar livros com empréstimo ativo\n2. Listar livros com devolução em atraso\n3. Voltar\n"))
@@ -97,14 +98,14 @@ while True:
                     case 1:
                         listarEmprestimos(listaEmprestimos, listaUsuarios, listaLivros)
                     case 2:
-                        listarEmprestimosAtrasados(listaEmprestimos)
+                        listarEmprestimosAtrasados(listaEmprestimos, diaAtualSistema)
                     case 3:
                         print(f"Voltando para o menu principal...")
                         break
                     case _:
                         print(f"Opção inválida. Tente novamente.")
         case 6: 
-            print("Em desenvolvimento")
+            diaAtualSistema = menuGerenciarTempo(diaAtualSistema)
         case 7:
             print("Saindo...")
             break
