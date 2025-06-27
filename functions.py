@@ -176,9 +176,9 @@ def realizarEmprestimo(listaUsuarios, listaLivros, listaEmprestimos, diaAtualSis
                 dataDevolucao = diaAtualSistema,
                 status = "ativo"
             )
-            if usuario.tipo == "aluno" or usuario.tipo == "Aluno":
+            if usuario.tipo.lower() == "aluno":
                 emprestimo.dataDevolucao = diaAtualSistema + 7
-            elif usuario.tipo == "professor" or usuario.tipo == "Professor":
+            elif usuario.tipo.lower() == "professor":
                 emprestimo.dataDevolucao = diaAtualSistema + 10
             listaLivros[indexLivro].qtdExemplares -= 1
             listaEmprestimos.append(emprestimo)
