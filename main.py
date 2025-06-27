@@ -1,4 +1,4 @@
-from functions import cadastrarLivro, cadastrarUsuario, realizarEmprestimo, devolverEmprestimo, listarEmprestimos, listarEmprestimosAtrasados, menuGerenciarTempo
+from functions import cadastrarLivro, cadastrarUsuario, realizarEmprestimo, devolverEmprestimo, listarEmprestimos, listarEmprestimosAtrasados, menuGerenciarTempo, listarLivrosCadastrados, listarUsuarios, buscarLivroPorId
 from banco_base import users, books, rents
 diaAtualSistema = 1
 listaLivros = [books.sangueEGelo, books.oMorroDosVentosUivantes, books.asVantagensDeSerInvisivel, books.psicologiaFinanceira] #lista para armazenar os livros
@@ -29,32 +29,9 @@ while True:
                         listaLivros.append(livro)
                     case 2:
                         if len(listaLivros) > 0:
-                            print(f"Livros cadastrados:")
-                            for i in range (len(listaLivros)):
-                                print(f"Título: {listaLivros[i].titulo}")
-                                print(f"ID: {listaLivros[i].id}")
-                                print(f"Autor: {listaLivros[i].autor}")
-                                print(f"Ano de publicação: {listaLivros[i].anoPublicacao}")
-                                print(f"Gênero: {listaLivros[i].genero}")
-                                print(f"Exemplares disponíveis: {listaLivros[i].qtdExemplares}")
-                                print("------------------")
+                            listarLivrosCadastrados(listaLivros)
                     case 3:
-                        idBusca = int(input(f"Digite o código do livro que deseja buscar: "))
-                        print("------------------")
-                        livroEncontrado = False
-                        for i in range(len(listaLivros)):
-                            if listaLivros[i].id == idBusca:
-                                livroEncontrado = True
-                                print(f"Título: {listaLivros[i].titulo}")
-                                print(f"ID: {listaLivros[i].id}")
-                                print(f"Autor: {listaLivros[i].autor}")
-                                print(f"Ano de publicação: {listaLivros[i].anoPublicacao}")
-                                print(f"Gênero: {listaLivros[i].genero}")
-                                print(f"Exemplares disponíveis: {listaLivros[i].qtdExemplares}")
-                                print("------------------")
-                        if livroEncontrado == False:
-                            print(f"Não há nenhum livro com o ID {idBusca}.")
-                            print("------------------")
+                        buscarLivroPorId(listaLivros)
                     case 4:
                         print("Voltando para o menu principal...")
                         print("------------------")
@@ -71,12 +48,7 @@ while True:
                         listaUsuarios.append(usuario)
                     case 2:
                         if len(listaUsuarios) > 0:
-                            print(f"Lista de usuários: ")
-                            for i in range(len(listaUsuarios)):
-                                print(f"Nome: {listaUsuarios[i].nome}")
-                                print(f"ID: {listaUsuarios[i].id}")
-                                print(f"Tipo: {listaUsuarios[i].tipo}")
-                                print("------------------")
+                            listarUsuarios(listaUsuarios)
                         else:
                             print(f"A lista de usuários está vazia no momento.")
                             print("------------------")

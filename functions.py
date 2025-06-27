@@ -46,16 +46,58 @@ def menuGerenciarTempo(diaAtualSistema):
             print("------------------")
     return diaAtualSistema # Retorna o dia atualizado
 
+def listarLivrosCadastrados(listaLivros):
+    print(f"Livros cadastrados: ")
+    for i in range(len(listaLivros)):
+        print(f"Título do livro: {listaLivros[i].titulo}")
+        print(f"Código do livro: {listaLivros[i].id}")
+        print(f"Autor: {listaLivros[i].autor}")
+        print(f"Ano de publicação: {listaLivros[i].anoPublicacao}")
+        print(f"Gênero: {listaLivros[i].genero}")
+        print(f"Exemplares disponíveis: {listaLivros[i].qtdExemplares}")
+        print("------------------")
+
+def listarUsuarios(listaUsuarios):
+    print(f"Lista de usuários: ")
+    for i in range(len(listaUsuarios)):
+        print(f"Nome: {listaUsuarios[i].nome}")
+        print(f"ID: {listaUsuarios[i].id}")
+        print(f"Tipo: {listaUsuarios[i].tipo}")
+        print("------------------")
+
+def buscarLivroPorId(listaLivros):
+    livroEncontrado = False
+    idLivro = int(input("Digite o código do livro que deseja buscar: "))
+    for i in range(len(listaLivros)):
+        if listaLivros[i].id == idLivro:
+            livroEncontrado = True
+            print(f"Título: {listaLivros[i].titulo}")
+            print(f"ID: {listaLivros[i].id}")
+            print(f"Autor: {listaLivros[i].autor}")
+            print(f"Ano de publicação: {listaLivros[i].anoPublicacao}")
+            print(f"Gênero: {listaLivros[i].genero}")
+            print(f"Exemplares disponíveis: {listaLivros[i].qtdExemplares}")
+            print("------------------")
+    if livroEncontrado == False:
+        print(f"Nào há nenhum livro com o ID {idLivro}.")
+        print("------------------")
+
+
 def cadastrarLivro():
     print(f"Iniciando cadastro de livro...")
     print("------------------")
     #solicitando ao usuário as informações do livro
-    id = int(input(f"Digite o código para o livro: "))
-    titulo = str(input(f"Título do livro: "))
-    autor = str(input(f"Autor do livro: "))
-    anoPublicacao = int(input(f"Ano de publicação do livro: "))
-    genero = str(input(f"Gênero do livro: "))
-    qtdExemplares = int(input("Digite a quantidade de exemplares disponíveis: "))
+    try:
+        id = int(input(f"Digite o código para o livro: "))
+        titulo = str(input(f"Título do livro: "))
+        autor = str(input(f"Autor do livro: "))
+        anoPublicacao = int(input(f"Ano de publicação do livro: "))
+        genero = str(input(f"Gênero do livro: "))
+        qtdExemplares = int(input("Digite a quantidade de exemplares disponíveis: "))
+    except ValueError:
+        print("Entrada de dados inválida.")
+        print("------------------")
+        return None
     #criando um novo livro com as propriedades que o usuário forneceu
     livro = Livro(
         id = id,
@@ -73,10 +115,15 @@ def cadastrarLivro():
 def cadastrarUsuario():
     print(f"Iniciando cadastro de usuário...")
     print("------------------")
-    #solicitando ao usuário as informações para registro
-    id = int(input(f"Digite o identificador do novo usuário: "))
-    nome = str(input(f"Digite o nome do usuário: "))
-    tipo = str(input(f"O usuário é aluno ou professor? "))
+    #solicitando ao usuário as informações para 
+    try:
+        id = int(input(f"Digite o identificador do novo usuário: "))
+        nome = str(input(f"Digite o nome do usuário: "))
+        tipo = str(input(f"O usuário é aluno ou professor? "))
+    except ValueError:
+        print("Entrada de dados inválida.")
+        print("------------------")
+        return
     #criando um novo usuário com as propriedades que o usuário forneceu
     usuario = Usuario(
         id = id,
@@ -90,16 +137,26 @@ def cadastrarUsuario():
 def realizarEmprestimo(listaUsuarios, listaLivros, listaEmprestimos, diaAtualSistema):
     if len(listaUsuarios) > 0 and len(listaLivros) > 0:
         usuarioValido = False
-        idUsuario = int(input(f"Digite o ID do usuário: "))
-        print("------------------")
+        try:
+            idUsuario = int(input(f"Digite o ID do usuário: "))
+            print("------------------")
+        except ValueError:
+            print("Entrada de dados inválida.")
+            print("------------------")
+            return
         for i in range(len(listaUsuarios)):
             if listaUsuarios[i].id == idUsuario:
                 usuarioValido = True
                 usuario = listaUsuarios[i]
         if usuarioValido == True:
             livroValido = False
-            idLivro = int(input(f"Digite o código do livro para empréstimo: "))
-            print("------------------")
+            try:
+                idLivro = int(input(f"Digite o código do livro para empréstimo: "))
+                print("------------------")
+            except ValueError:
+                print("Entrada de dados inválida.")
+                print("------------------")
+                return
             for i in range(len(listaLivros)):
                 if listaLivros[i].id == idLivro and listaLivros[i].qtdExemplares > 0:
                     livroValido = True
