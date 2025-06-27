@@ -1,5 +1,8 @@
 from models import Livro, Usuario, Emprestimo
+from functions import cadastrarLivro
 diaAtualSistema = 1 #variável global que servirá de controle para verificar o funcionamento de empréstimos e multas
+listaLivros = [] #lista para armazenar os livros
+listaUsuarios = [] #lista para armazenar os usuários
 
 #implementação do laço de repetição que exibe o menu principal:
 while True:
