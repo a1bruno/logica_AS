@@ -87,7 +87,7 @@ while True:
                         print(f"Opção inválida. Tente outra vez.")
                         print("------------------")
         case 3:
-            novoEmprestimo = realizarEmprestimo(listaUsuarios, listaLivros)
+            novoEmprestimo = realizarEmprestimo(listaUsuarios, listaLivros, listaEmprestimos)
         case 4:
             devolucao = devolverEmprestimo(listaEmprestimos, listaLivros)
         case 5:

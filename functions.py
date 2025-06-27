@@ -42,7 +42,7 @@ def cadastrarUsuario():
     print(f"\n Usuário {usuario.nome} registrado com sucesso!\n")
     return usuario
 
-def realizarEmprestimo(listaUsuarios, listaLivros):
+def realizarEmprestimo(listaUsuarios, listaLivros, listaEmprestimos):
     if len(listaUsuarios) > 0 and len(listaLivros) > 0:
         usuarioValido = False
         idUsuario = int(input(f"Digite o ID do usuário: "))
@@ -79,6 +79,7 @@ def realizarEmprestimo(listaUsuarios, listaLivros):
             elif usuario.tipo == "professor" or usuario.tipo == "Professor":
                 emprestimo.dataDevolucao = diaAtualSistema + 10
             listaLivros[indexLivro].qtdExemplares -= 1
+            listaEmprestimos.append(emprestimo)
             print(f"Empréstimo realizado com sucesso:")
             print(f"Usuário do empréstimo: {usuario.nome};")
             print(f"Livro: {listaLivros[indexLivro].titulo};")
