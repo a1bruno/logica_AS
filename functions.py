@@ -130,5 +130,32 @@ def devolverEmprestimo(listaEmprestimos, listaLivros):
 
         else:
             print(f"Não existe um empréstimo/livro para este código.")
+            print("------------------")
     else:
         print(f"Não existe um empréstimo para o ID fornecido.")
+        print("------------------")
+
+def listarEmprestimos(listaEmprestimos, listaUsuarios, listaLivros):
+    if len(listaEmprestimos) > 0:
+        print(f"Livros emprestados atualmente:")
+        for i in range(len(listaEmprestimos)):
+            idUsuario = listaEmprestimos[i].idUsuario
+            idLivro = listaEmprestimos[i].idLivro
+            dataDevolucaoPrevista = listaEmprestimos[i].dataDevolucao
+            nomeUsuario = ""
+            tituloLivro = ""
+            for j in range(len(listaUsuarios)):
+                if listaUsuarios[j].id == idUsuario:
+                    nomeUsuario = listaUsuarios[j].nome
+                    break
+            for y in range(len(listaLivros)):
+                if listaLivros[y].id == idLivro:
+                    tituloLivro = listaLivros[y].titulo
+                    break
+            print(f"Usuário do empréstimo: {nomeUsuario}")
+            print(f"Título emprestado: {tituloLivro}")
+            print(f"Data de devolução prevista: dia {dataDevolucaoPrevista}")
+            print("------------------")
+    else:
+        print(f"Não há empréstimos ativos.")
+        print("------------------")

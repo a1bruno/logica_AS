@@ -1,4 +1,4 @@
-from functions import cadastrarLivro, cadastrarUsuario, realizarEmprestimo, devolverEmprestimo
+from functions import cadastrarLivro, cadastrarUsuario, realizarEmprestimo, devolverEmprestimo, listarEmprestimos
 from banco_base import users, books, rents
 listaLivros = [books.sangueEGelo, books.oMorroDosVentosUivantes, books.asVantagensDeSerInvisivel, books.psicologiaFinanceira] #lista para armazenar os livros
 listaUsuarios = [users.bruno, users.josefina, users.antonio, users.melissa] #lista para armazenar os usuários
@@ -91,7 +91,15 @@ while True:
         case 4:
             devolucao = devolverEmprestimo(listaEmprestimos, listaLivros)
         case 5:
-            print("Em desenvolvimento")
+            while True:
+                opcaoMenuEmprestimos = int(input("1. Listar livros com empréstimo ativo\n2. Listar livros com devolução em atraso\n3. Voltar\n"))
+                match opcaoMenuEmprestimos:
+                    case 1:
+                        listarEmprestimos(listaEmprestimos, listaUsuarios, listaLivros)
+                    case 2:
+                        break
+                    case _:
+                        print(f"Opção inválida. Tente novamente.")
         case 6: 
             print("Em desenvolvimento")
         case 7:
