@@ -89,3 +89,44 @@ def realizarEmprestimo(listaUsuarios, listaLivros):
         print("Não é possível realizar um empréstimo. Não existem livros e/ou usuários cadastrados em nosso sistema.")
         print("------------------")
         
+def devolverEmprestimo(listaEmprestimos, listaLivros):
+    emprestimoExistente = False
+    livroCorreto = False
+    idUsuario = int(input(f"Digite o id do usuário: "))
+    print("------------------")
+    for i in range(len(listaEmprestimos)):
+        if listaEmprestimos[i].idUsuario == idUsuario:
+            emprestimoExistente = True
+            indexEmprestimo = i
+            break
+    if emprestimoExistente == True:
+        idLivro = int(input(f"Digite o código do livro: "))
+        print("------------------")
+        for i in range(len(listaEmprestimos)):
+            if listaEmprestimos[i].idLivro == idLivro:
+                livroCorreto = True
+                break
+        if livroCorreto == True:
+            dataDevolucaoEfetiva = diaAtualSistema
+            for i in range(len(listaLivros)):
+                if listaLivros[i].id == idLivro:
+                    listaLivros[i].qtdExemplares += 1
+                    break
+            listaEmprestimos[indexEmprestimo].status = "devolvido"
+            if dataDevolucaoEfetiva > listaEmprestimos[indexEmprestimo].dataDevolucao:
+                valorMultaDia = 1.0
+                diasEmAtraso = dataDevolucaoEfetiva - listaEmprestimos[indexEmprestimo].dataDevolucao
+                multaUsuario = diasEmAtraso * valorMultaDia
+                
+                print(f"Devolução realizada com sucesso!")
+                print("------------------")
+                print(f"Entretanto, você passou {diasEmAtraso} do prazo de devolução.")
+                print(f"Uma multa de R${multaUsuario} foi aplicada.")
+            else:
+                print(f"Devolução realizada com sucesso!")
+                print("------------------")
+
+        else:
+            print(f"Não existe um empréstimo/livro para este código.")
+    else:
+        print(f"Não existe um empréstimo para o ID fornecido.")

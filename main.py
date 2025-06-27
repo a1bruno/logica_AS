@@ -1,4 +1,4 @@
-from functions import cadastrarLivro, cadastrarUsuario, realizarEmprestimo
+from functions import cadastrarLivro, cadastrarUsuario, realizarEmprestimo, devolverEmprestimo
 from banco_base import users, books, rents
 listaLivros = [books.sangueEGelo, books.oMorroDosVentosUivantes, books.asVantagensDeSerInvisivel, books.psicologiaFinanceira] #lista para armazenar os livros
 listaUsuarios = [users.bruno, users.josefina, users.antonio, users.melissa] #lista para armazenar os usuários
@@ -89,7 +89,7 @@ while True:
         case 3:
             novoEmprestimo = realizarEmprestimo(listaUsuarios, listaLivros)
         case 4:
-            print("Em desenvolvimento")
+            devolucao = devolverEmprestimo(listaEmprestimos, listaLivros)
         case 5:
             print("Em desenvolvimento")
         case 6: 
