@@ -195,16 +195,26 @@ def realizarEmprestimo(listaUsuarios, listaLivros, listaEmprestimos, diaAtualSis
 def devolverEmprestimo(listaEmprestimos, listaLivros, diaAtualSistema):
     emprestimoExistente = False
     livroCorreto = False
-    idUsuario = int(input(f"Digite o id do usuário: "))
-    print("------------------")
+    try:
+        idUsuario = int(input(f"Digite o id do usuário: "))
+        print("------------------")
+    except ValueError:
+        print("Entrada de dados inválida.")
+        print("------------------")
+        return
     for i in range(len(listaEmprestimos)):
         if listaEmprestimos[i].idUsuario == idUsuario:
             emprestimoExistente = True
             indexEmprestimo = i
             break
     if emprestimoExistente == True:
-        idLivro = int(input(f"Digite o código do livro: "))
-        print("------------------")
+        try:
+            idLivro = int(input(f"Digite o código do livro: "))
+            print("------------------")
+        except ValueError:
+            print("Entrada de válido inválida.")
+            print("------------------")
+            return
         for i in range(len(listaEmprestimos)):
             if listaEmprestimos[i].idLivro == idLivro:
                 livroCorreto = True
@@ -230,7 +240,6 @@ def devolverEmprestimo(listaEmprestimos, listaLivros, diaAtualSistema):
                 print(f"Devolução realizada com sucesso!")
                 print("------------------")
             listaEmprestimos.pop(indexEmprestimo)
-
         else:
             print(f"Não existe um empréstimo/livro para este código.")
             print("------------------")
